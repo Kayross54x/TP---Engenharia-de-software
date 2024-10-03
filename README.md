@@ -14,8 +14,11 @@ As principais features a serem aplicadas serão:
 
 ## Membros da Equipe e Funções
 Alex Eduardo Alves dos Santos - Desenvolvedor front-end
+
 Kayque Meira Siqueira - Desenvolvedor back-end
+
 Mateus Augusto Gomes - Desenvolvedor front-end
+
 Rubens da Cunha Castro - Desenvolvedor back-end
 
 ## Tecnologias
