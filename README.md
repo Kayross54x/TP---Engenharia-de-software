@@ -25,6 +25,42 @@ Rubens da Cunha Castro - Desenvolvedor back-end
 
 | Layer da Aplicação | Tecnologias |
 | --- | --- |
-| Front-end | Typescript + Next |
+| Front-end | Typescript + React |
 | Back-end | Node.js + Typescript + ORM Prisma |
 | Banco de dados | SQLite |
+
+## Backlog do Produto (Histórias de Usuário):
+
+1. Como usuário eu gostaria de visualizar processos e seus detalhes a partir de seu código;
+2. Como usuário eu gostaria de me cadastrar;
+3. Como usuário eu gostaria de "favoritar" processos;
+4. Como usuário eu gostaria de "desfavoritar" processos;
+5. Como usuário eu gostaria de revisitar processos;
+6. Como usuário eu gostaria de ver meu histórico de processos pesquisados;
+7. Como usuário eu gostaria de visualizar uma timeline das atualizações do processo pesquisado;
+8. Como usuário eu gostaria de adicionar filtros na pesquisa;
+9. Como usuário eu gostaria de ver referências sobre processos jurídicos;
+10. Como usuário eu gostaria de acessar um glossário sobre termos/expressões jurídicos;
+ 
+
+## Backlog da Sprint:
+
+1 - História 1 (Como usuário eu gostaria de visualizar processos e seus detalhes a partir de seu código):
+  * Implementar integração com a API DataJus (https://datajud-wiki.cnj.jus.br) []
+  * Construir a Página de pesquisa (Layout) []
+  * Implementar Pesquisa a partir do código do processo; []
+
+2 - História 2 (Como usuário eu gostaria de me cadastrar):
+  * Integrar banco de dados []
+  * Construir página de Login/Cadastro []
+  * Implementar Login []
+  * Implementar Cadastro []
+  * Implementar recuperação de senha []
+  * Implementar Logout []
+
+3 - História 3/4 (Como usuário eu gostaria de "favoritar"/"desfavoritar" processos):
+  * Implementar botão de "favoritar"/"desfavoritar" do processo []
+  * Implementar "cards" dos processos favoritados pelo usuário a página inicial []
+
+4 - História 5 (Como usuário eu gostaria de revisitar processos):
+  * Implementar possibilidade de pesquisa pelos processo(s) "favoritado(s)" em seus "cards" []
