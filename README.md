@@ -25,7 +25,7 @@ Rubens da Cunha Castro - Desenvolvedor back-end
 
 | Layer da Aplicação | Tecnologias |
 | --- | --- |
-| Front-end | Typescript + React |
+| Front-end | Typescript + Next |
 | Back-end | Node.js + Typescript + ORM Prisma |
 | Banco de dados | SQLite |
 
