@@ -45,22 +45,25 @@ Rubens da Cunha Castro - Desenvolvedor back-end
 
 ## Backlog da Sprint:
 
-1 - História 1 (Como usuário eu gostaria de visualizar processos e seus detalhes a partir de seu código):
-  * Implementar integração com a API DataJus (https://datajud-wiki.cnj.jus.br) []
-  * Construir a Página de pesquisa (Layout) []
-  * Implementar Pesquisa a partir do código do processo; []
+1 - História 2 (Como usuário eu gostaria de me cadastrar):
+  * Instalar e Configurar Prisma [Kayque]
+  * Integrar banco de dados [Kayque]
+  * Construir página de Login/Cadastro (Layout) [Alex]
+  * Implementar Login [Kayque]
+  * Implementar Cadastro [Kayque]
+  * Implementar recuperação de senha [Kayque]
+  * Implementar Logout [Kayque]
 
-2 - História 2 (Como usuário eu gostaria de me cadastrar):
-  * Integrar banco de dados []
-  * Construir página de Login/Cadastro []
-  * Implementar Login []
-  * Implementar Cadastro []
-  * Implementar recuperação de senha []
-  * Implementar Logout []
+2 - História 1 (Como usuário eu gostaria de visualizar processos e seus detalhes a partir de seu código):
+  * Implementar integração com a API DataJus (https://datajud-wiki.cnj.jus.br) [Rubens]
+  * Construir a Página de pesquisa (Layout) [Mateus]
+  * Implementar Pesquisa a partir do código do processo [Rubens]
+  * Construir a Página de descrição do processo (Layout) [Alex]
 
 3 - História 3/4 (Como usuário eu gostaria de "favoritar"/"desfavoritar" processos):
-  * Implementar botão de "favoritar"/"desfavoritar" do processo []
-  * Implementar "cards" dos processos favoritados pelo usuário a página inicial []
+  * Construir modelo ds botões e design dos cards [Mateus]
+  * Implementar botão de "favoritar"/"desfavoritar" do processo [Rubens]
+  * Implementar "cards" dos processos favoritados pelo usuário na página inicial [Rubens]
 
 4 - História 5 (Como usuário eu gostaria de revisitar processos):
-  * Implementar possibilidade de pesquisa pelos processo(s) "favoritado(s)" em seus "cards" []
+  * Redirecionar para a página do processo ao clicar nos cards [Alex]
