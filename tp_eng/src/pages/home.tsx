@@ -1,14 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { User } from "@prisma/client";
 import Image from "next/image";
 
-interface UserSearchProps {
-	users: User[];
-}
-
-export default function HomeClientSide({ users }: UserSearchProps) {
+export default function HomeClientSide() {
 	const [processId, setProcessId] = useState<string>("");
 
 	function onProcessIdChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -20,12 +15,12 @@ export default function HomeClientSide({ users }: UserSearchProps) {
 		e.preventDefault();
 
 		// Fazendo a requisição para a rota de API
-		const response = await fetch("/api/processId", {
-			method: "POST",
+		const userId = "ec431674-d709-4bb6-a9be-7173d0da3801";
+		const response = await fetch(`/api/user/${userId}`, {
+			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ processId }),
 		});
 
 		if (response.ok) {
@@ -89,6 +84,5 @@ export default function HomeClientSide({ users }: UserSearchProps) {
 				</a>
 			</div>
 		</main>
-
 	);
 }

@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const { processId } = await req.json();
-  console.log(processId);
 
   //fazer a requisicao com o fetch pro jus passando o processId
 
