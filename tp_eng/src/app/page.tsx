@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
-import LoginClientSide from "@/pages/login";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 	const [processId, setProcessId] = useState<string>("");
+	const router = useRouter();
 
 	function onProcessIdChange(e: React.ChangeEvent<HTMLInputElement>) {
 		e.preventDefault();
@@ -13,22 +14,22 @@ export default function Home() {
 
 	async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		router.push(`/process/${processId}`)
 
 		// Fazendo a requisição para a rota de API
-		const userId = "ec431674-d709-4bb6-a9be-7173d0da3801";
-		const response = await fetch(`/api/user/${userId}`, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
+		// const response = await fetch(`/api/process/${processId}`, {
+		// 	method: "GET",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 	},
+		// });
 
-		if (response.ok) {
-			const data = await response.json();
-			console.log("processo adicionado ao usuario", data)
-		} else {
-			console.error("Erro ao salvar processo");
-		}
+		// if (response.ok) {
+		// 	const data = await response.json();
+		// 	console.log("processo adicionado ao usuario", data)
+		// } else {
+		// 	console.error("Erro ao salvar processo");
+		// }
 	}
 
 	return (
@@ -37,7 +38,7 @@ export default function Home() {
 
 			<main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
 				<ol className="list-inside text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-					<li className="mb-2">
+					<li className="mb-12 font-bold text-4xl">
 						Pesquise pelo código do seu processo...
 					</li>
 

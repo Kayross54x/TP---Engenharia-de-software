@@ -24,11 +24,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col justify-between min-h-screen`}>
+			<head>
+				<style>{`
+					html, body {
+						height: 100%;
+					}
+				`}</style>
+			</head>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col justify-between h-screen`}>
 				<header className="flex justify-between items-center p-4 bg-gray-800 text-white">
 					<Link href="/" passHref>
 						<h1 className="text-3xl font-bold">
-							DataJus
+							ProcessJur
 						</h1>
 					</Link>
 					
@@ -50,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             */}
 					</div>
 				</header>
-				<main>{children}</main>
+				<main className="flex-grow">{children}</main>
 				<footer className="flex gap-6 flex-wrap items-center justify-center p-4 bg-gray-800">
 					<a
 						className="flex items-center gap-2 hover:underline hover:underline-offset-4"
