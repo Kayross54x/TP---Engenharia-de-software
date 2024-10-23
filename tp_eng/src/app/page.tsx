@@ -1,6 +1,7 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
+import LoginClientSide from "@/pages/login";
+import Image from "next/image";
 
 export default function Home() {
 	const [processId, setProcessId] = useState<string>("");
