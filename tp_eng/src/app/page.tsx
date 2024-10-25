@@ -14,7 +14,10 @@ export default function Home() {
 
 	async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		router.push(`/process/${processId}`);
+		if(processId.length > 0)
+			router.push(`/process/${processId}`);
+		else
+			alert("Digite um código válido.");
 	}
 
 	return (
@@ -37,7 +40,7 @@ export default function Home() {
 							onChange={onProcessIdChange}
 							className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all"
 						/>
-						<FaSearch className="absolute right-3 top-3 text-gray-400" />
+						{/*<FaSearch className="absolute right-3 top-3 text-gray-400" />*/}
 					</div>
 					<button
 						type="submit"
@@ -48,14 +51,14 @@ export default function Home() {
 				</form>
 			</main>
 
-			<footer className="mt-12 text-white">
+			{/* <footer className="mt-12 text-white">
 				<a
 					href="/login"
 					className="text-lg underline hover:text-gray-200 transition-all"
 				>
 					Logar
 				</a>
-			</footer>
+			</footer> */}
 		</div>
 	);
 }
