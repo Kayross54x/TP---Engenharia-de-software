@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { FaSearch } from "react-icons/fa";
 
 export default function Home() {
 	const [processId, setProcessId] = useState<string>("");
@@ -14,82 +14,48 @@ export default function Home() {
 
 	async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		router.push(`/process/${processId}`)
-
-		// Fazendo a requisição para a rota de API
-		// const response = await fetch(`/api/process/${processId}`, {
-		// 	method: "GET",
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 	},
-		// });
-
-		// if (response.ok) {
-		// 	const data = await response.json();
-		// 	console.log("processo adicionado ao usuario", data)
-		// } else {
-		// 	console.error("Erro ao salvar processo");
-		// }
+		router.push(`/process/${processId}`);
 	}
 
 	return (
-		<div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-			
+		<div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-purple-800 p-4">
+			<header className="text-white text-3xl font-bold mb-8">
+				ProcessJur
+			</header>
 
-			<main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-				<ol className="list-inside text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-					<li className="mb-12 font-bold text-4xl">
-						Pesquise pelo código do seu processo...
-					</li>
+			<main className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+				<h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
+					Pesquise pelo código do seu processo
+				</h1>
 
-					<form onSubmit={onSubmit}>
-						<div className="flex flex-col items-end justify-center">
-							<input
-								type="text"
-								value={processId}
-								onChange={onProcessIdChange}
-								className="rounded p-2 border border-gray-300 w-full text-purple-500 focus:outline-purple-500"
-							/>
-							{/* <p>Process ID: {processId}</p> */}
-							<button type="submit" className="mt-2 rounded bg-purple-500 p-2 hover:bg-purple-400 transition-all">Buscar processo</button>
-						</div>
-
-					</form>
-
-
-					{/* <li className="mb-2">
-					<pre>{JSON.stringify(users, null, 2)}</pre>
-				</li> */}
-				</ol>
-
-				<div className="flex gap-4 items-center flex-col sm:flex-row">
-					<a
-						className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-						href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<Image
-							className="dark:invert"
-							src="https://nextjs.org/icons/vercel.svg"
-							alt="Vercel logomark"
-							width={20}
-							height={20}
+				<form onSubmit={onSubmit} className="flex flex-col gap-4">
+					<div className="relative">
+						<input
+							type="text"
+							placeholder="Digite o código do processo"
+							value={processId}
+							onChange={onProcessIdChange}
+							className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all"
 						/>
-						Deploy now
-					</a>
-					<a
-						className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-						href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
+						<FaSearch className="absolute right-3 top-3 text-gray-400" />
+					</div>
+					<button
+						type="submit"
+						className="w-full p-3 bg-purple-600 text-white rounded-lg hover:bg-purple-500 transition-all"
 					>
-						Read our docs
-					</a>
-				</div>
+						Buscar processo
+					</button>
+				</form>
 			</main>
 
-			
+			<footer className="mt-12 text-white">
+				<a
+					href="/login"
+					className="text-lg underline hover:text-gray-200 transition-all"
+				>
+					Logar
+				</a>
+			</footer>
 		</div>
 	);
 }

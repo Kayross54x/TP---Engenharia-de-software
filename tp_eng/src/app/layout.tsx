@@ -59,7 +59,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				</header>
 				<main className="flex-grow">{children}</main>
 				<footer className="flex gap-6 flex-wrap items-center justify-center p-4 bg-gray-800">
-					<a
+					{/* Removendo links Learn, Examples e Go to nextjs.org */}
+					{/* <a
 						className="flex items-center gap-2 hover:underline hover:underline-offset-4"
 						href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
 						target="_blank"
@@ -103,7 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 							height={16}
 						/>
 						Go to nextjs.org →
-					</a>
+					</a> */}
 				</footer>
 			</body>
 		</html>
