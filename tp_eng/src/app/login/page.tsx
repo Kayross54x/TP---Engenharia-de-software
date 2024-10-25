@@ -1,11 +1,15 @@
 "use client";
 
+import useLocalStorage from "@/hooks/useLocalStorage";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
     const [email, setLogin] = useState<string>("");
     const [senha, setSenha] = useState<string>("");
+    const user = useLocalStorage("user");
+    const router = useRouter();
 
     function onUsernameOrEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
@@ -35,6 +39,8 @@ export default function Login() {
 
         if (response.status == 200) {
             const data = await response.json();
+            user.setItem(data)
+            router.push("/user");
             console.log("Usuário logado", data);
         } else if (response.status == 400) {
             console.error("Senha ou email incorretos");

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default function Process() {
 	const params = useParams();
-	const [processInfo, setProcessInfo] = useState<IProcess>({});
+	const [processInfo, setProcessInfo] = useState<IProcess>();
 
 	useEffect(() => {
 		if (typeof params.id !== 'string') return
@@ -15,15 +15,15 @@ export default function Process() {
 	}, [params])
 
 	function getProcessInfo(id: string) {
-		axios.get(`${process.env.NEXT_PUBLIC_API_URL}/process/${id}`, {
+		axios.get(`/api/process/${id}`, {
 			headers: {
 				"Content-Type": "application/json",
 			}
 		})
 		.then(response => {
-			const data: JsonResponse = response.data
-			setProcessInfo(data.hits.hits[0]);
+			const info: JsonResponse = response.data
 			console.log("processo obtido", response.data);
+			setProcessInfo(info.data.hits.hits[0]);
 		})
 		.catch(error => {
 			console.error("Erro ao salvar processo", error);
@@ -31,6 +31,9 @@ export default function Process() {
 	}
 
 	return (
-		<div>Process</div>
+		<div>
+			Process {JSON.stringify(processInfo, null, 2)}
+		</div>
+
 	)
 }
