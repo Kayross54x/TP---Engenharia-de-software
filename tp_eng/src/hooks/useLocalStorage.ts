@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 function useLocalStorage(key: string) {
     function isClient() {
         return typeof window !== 'undefined';

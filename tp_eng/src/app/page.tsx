@@ -37,7 +37,7 @@ export default function Home() {
 							placeholder="Digite o código do processo"
 							value={processId}
 							onChange={onProcessIdChange}
-							className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all"
+							className="w-full p-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all"
 						/>
 						{/*<FaSearch className="absolute right-3 top-3 text-gray-400" />*/}
 					</div>

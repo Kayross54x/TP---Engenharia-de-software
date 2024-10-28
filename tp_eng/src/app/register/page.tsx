@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import { UserContext } from "@/context/UserContext";
 
 export default function Register() {
     const [name, setName] = useState<string>("");
@@ -16,7 +16,7 @@ export default function Register() {
     const [passwordError, setPasswordError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
-    const user = useLocalStorage("user");
+    const { setUserLogged } = useContext(UserContext);
     const router = useRouter();
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -95,11 +95,9 @@ export default function Register() {
             body: JSON.stringify(newUser),
         });
 
-        console.log(response);
-
         if (response.status == 200) {
             const data = await response.json();
-            user.setItem(data)
+            setUserLogged(data)
             setLoading(false);
             router.push("/user");
         } else if (response.status == 400) {

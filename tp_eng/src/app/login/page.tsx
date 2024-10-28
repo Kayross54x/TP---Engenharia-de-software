@@ -1,8 +1,8 @@
 "use client";
-import useLocalStorage from "../../hooks/useLocalStorage";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
+import { UserContext } from "../../context/UserContext";
 
 export default function Login() {
     const [email, setEmail] = useState<string>("");
@@ -11,7 +11,7 @@ export default function Login() {
     const [passwordError, setPasswordError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
-    const user = useLocalStorage("user");
+    const { setUserLogged } = useContext(UserContext);
     const router = useRouter();
 
     function onUsernameOrEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -50,8 +50,6 @@ export default function Login() {
 
         if (!formValid()) {setLoading(false); return};
 
-        // console.log(email, senha);
-
         //Fazendo a requisição de login para a rota de API
         const response = await fetch("/api/login", {
             method: "POST",
@@ -61,11 +59,9 @@ export default function Login() {
             body: JSON.stringify({ email: email, senha: password }),
         });
 
-        console.log(response);
-
         if (response.status == 200) {
             const data = await response.json();
-            user.setItem(data)
+            setUserLogged(data.userObject)
             setLoading(false);
             router.push("/user");
         } else if (response.status == 400) {

@@ -1,9 +1,9 @@
 "use client";
 import { useParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import useLocalStorage from "../../../hooks/useLocalStorage";
-import { Process, UserProcess } from '@prisma/client';
+import { UserContext } from '@/context/UserContext';
+import Link from 'next/link';
 
 interface IProcess {
 	numeroProcesso?: string;
@@ -46,13 +46,7 @@ export default function ProcessPage() {
 	const [processInfo, setProcessInfo] = useState<IProcess | undefined>();
 	const [showMovimentos, setShowMovimentos] = useState(false); // Estado para controlar a visibilidade dos movimentos
 
-	const [user, setUser] = useState<any>(null);
-	const localStorage = useLocalStorage("user");
-
-	useEffect(() => {
-		const storedUser = localStorage.getItem();
-		setUser(storedUser.userObject);
-	}, []);
+	const { userLogged } = useContext(UserContext);
 
 	useEffect(() => {
 		if (typeof params.id !== 'string') return;
@@ -72,7 +66,7 @@ export default function ProcessPage() {
 				console.log("processo obtido", info.data.hits.hits[0]?._source);
 				if(info.data.hits.hits[0]?._source) {
 					setProcessInfo(info.data.hits.hits[0]._source); // Acessando _source
-					if(user) {
+					if(userLogged) {
 						registerProcess(info.data.hits.hits[0]._source);
 						registerUserProcess(info.data.hits.hits[0]._source);
 					}
@@ -85,8 +79,8 @@ export default function ProcessPage() {
 			});
 	}
 
-	function registerProcess(process: any) {
-		const newProcess: Process = {
+	function registerProcess(process: IProcess) {
+		const newProcess = {
 			movementCount: process.movimentos?.length,
 			name: process.classe?.nome,
 			processCode: process.numeroProcesso,
@@ -101,10 +95,10 @@ export default function ProcessPage() {
 			});
 	}
 
-	function registerUserProcess(process: any) {
-		if(!user) return;
-		const newUserProcess: UserProcess = {
-			userId: user.id,
+	function registerUserProcess(process: IProcess) {
+		if(!userLogged) return;
+		const newUserProcess = {
+			userId: userLogged.id,
 			processCode: process.numeroProcesso
 		}
 
@@ -152,10 +146,10 @@ export default function ProcessPage() {
 			</main>
 
 			<footer className="mt-12 text-white">
-				<a href="/"
-					className="text-lg underline hover:text-gray-200 transition-all">
-					Voltar para a busca
-				</a>
+				<Link href={"/"} passHref className="text-lg underline hover:text-gray-200 transition-all">
+					<div>Voltar para a busca</div>
+				</Link>
+
 			</footer>
 		</div>
 	);

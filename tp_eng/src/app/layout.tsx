@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../styles/globals.css";
 import Header from "@/components/Header";
+import UserContextProvider from "@/context/UserContext";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -30,12 +31,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					}
 				`}</style>
 			</head>
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col justify-between h-screen`}>
-				<Header /> 
-				<main className="flex-grow">{children}</main>
-				{/* <footer className="flex gap-6 flex-wrap items-center justify-center p-4 bg-gray-800"> */}
-				{/* Removendo links Learn, Examples e Go to nextjs.org */}
-				{/* <a
+			<UserContextProvider>
+				<body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col justify-between h-screen`}>
+					<Header />
+					<main className="flex-grow">{children}</main>
+					{/* <footer className="flex gap-6 flex-wrap items-center justify-center p-4 bg-gray-800"> */}
+					{/* Removendo links Learn, Examples e Go to nextjs.org */}
+					{/* <a
 						className="flex items-center gap-2 hover:underline hover:underline-offset-4"
 						href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
 						target="_blank"
@@ -80,8 +82,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						/>
 						Go to nextjs.org →
 					</a> */}
-				{/* </footer> */}
-			</body >
+					{/* </footer> */}
+				</body >
+			</UserContextProvider>
+
 		</html >
 	);
 }

@@ -1,16 +1,10 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
-import useLocalStorage from '../hooks/useLocalStorage';
+import { UserContext } from '@/context/UserContext';
 
 export default function Header() {
-	const [user, setUser] = useState<any>(null);
-	const localStorage = useLocalStorage("user");
-
-	useEffect(() => {
-		const storedUser = localStorage.getItem();
-		setUser(storedUser.userObject);
-	}, []);
+	const { userLogged } = useContext(UserContext);
 
 	return (
 		<header className="flex justify-between items-center p-4 bg-gray-800 text-white">
@@ -19,13 +13,13 @@ export default function Header() {
 			</Link>
 
 			<div>
-				{user ? (
+				{userLogged ? (
 					<Link href="/user" passHref>
-						<div>{user.name}</div>
+						<div>{userLogged.name}</div>
 					</Link>
 				) : (
 					<Link href="/login" passHref>
-						<button className="rounded border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
+						<button className="rounded border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-8 sm:h-9 px-4">
 							Logar
 						</button>
 					</Link>
