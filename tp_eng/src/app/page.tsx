@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaSearch } from "react-icons/fa";
 
 export default function Home() {
 	const [processId, setProcessId] = useState<string>("");
@@ -21,12 +20,12 @@ export default function Home() {
 	}
 
 	return (
-		<div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-purple-800 p-4">
+		<div className="flex flex-col gap-8 row-start-2 items-center justify-center h-full p-12 bg-gradient-to-b from-blue-900 to-purple-800">
 			<header className="text-white text-3xl font-bold mb-8">
 				ProcessJur
 			</header>
 
-			<main className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+			<main className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full">
 				<h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
 					Pesquise pelo código do seu processo
 				</h1>

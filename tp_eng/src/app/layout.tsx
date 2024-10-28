@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../styles/globals.css";
-import Image from "next/image";
-import Link from "next/link";
+import Header from "@/components/Header";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -32,35 +31,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				`}</style>
 			</head>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col justify-between h-screen`}>
-				<header className="flex justify-between items-center p-4 bg-gray-800 text-white">
-					<Link href="/" passHref>
-						<h1 className="text-3xl font-bold">
-							ProcessJur
-						</h1>
-					</Link>
-					
-					<div>
-						{/* Botão de login */}
-						<Link href="/login" passHref>
-							<button className="rounded border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
-								Logar
-							</button>
-						</Link>
-						{/* Layout para cabeçalho de usuário logado */}
-						{/* 
-            <div className="flex items-center">
-              <span className="mr-4">Nome do Usuário</span>
-              <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-                Sair
-              </button>
-            </div>
-            */}
-					</div>
-				</header>
+				<Header /> 
 				<main className="flex-grow">{children}</main>
-				<footer className="flex gap-6 flex-wrap items-center justify-center p-4 bg-gray-800">
-					{/* Removendo links Learn, Examples e Go to nextjs.org */}
-					{/* <a
+				{/* <footer className="flex gap-6 flex-wrap items-center justify-center p-4 bg-gray-800"> */}
+				{/* Removendo links Learn, Examples e Go to nextjs.org */}
+				{/* <a
 						className="flex items-center gap-2 hover:underline hover:underline-offset-4"
 						href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
 						target="_blank"
@@ -105,8 +80,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						/>
 						Go to nextjs.org →
 					</a> */}
-				</footer>
-			</body>
-		</html>
+				{/* </footer> */}
+			</body >
+		</html >
 	);
 }
