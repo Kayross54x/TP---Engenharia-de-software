@@ -14,20 +14,18 @@ export default function Home() {
 
 	async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		if(processId.length > 0)
-			router.push(`/process/${processId}`);
-		else
-			alert("Digite um código válido.");
+		if (processId.length > 0) router.push(`/process/${processId}`);
+		else alert("Digite um código válido.");
 	}
 
 	return (
-		<div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-purple-800 p-4">
-			<header className="text-white text-3xl font-bold mb-8">
+		<div className="min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-b from-blue-800 to-purple-700 p-4">
+			<header className="text-white text-2xl font-bold mb-4">
 				ProcessJur
 			</header>
 
-			<main className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-				<h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
+			<main className="bg-white rounded-lg shadow-2xl p-6 max-w-md w-full">
+				<h1 className="text-xl font-bold text-center mb-4 text-gray-800">
 					Pesquise pelo código do seu processo
 				</h1>
 
@@ -38,27 +36,27 @@ export default function Home() {
 							placeholder="Digite o código do processo"
 							value={processId}
 							onChange={onProcessIdChange}
-							className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all"
+							className="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all"
 						/>
-						{/*<FaSearch className="absolute right-3 top-3 text-gray-400" />*/}
+						{/* <FaSearch className="absolute right-3 top-3 text-gray-400" /> */}
 					</div>
 					<button
 						type="submit"
-						className="w-full p-3 bg-purple-600 text-white rounded-lg hover:bg-purple-500 transition-all"
+						className="w-full p-3 bg-purple-600 text-white rounded-lg hover:bg-purple-500 hover:scale-105 transition-all"
 					>
 						Buscar processo
 					</button>
 				</form>
 			</main>
 
-			{/* <footer className="mt-12 text-white">
+			<footer className="mt-8 text-white">
 				<a
 					href="/login"
-					className="text-lg underline hover:text-gray-200 transition-all"
+					className="text-lg hover:text-gray-200 transition-all rounded-md px-4 py-2 bg-gray-800"
 				>
-					Logar
+					Login
 				</a>
-			</footer> */}
+			</footer>
 		</div>
 	);
 }
