@@ -30,4 +30,5 @@ model UserProcess {
   id        String   @id @default(uuid()) 
   userId    String   
   processCode String   
+  favouritedDate DateTime @default(now())
 }

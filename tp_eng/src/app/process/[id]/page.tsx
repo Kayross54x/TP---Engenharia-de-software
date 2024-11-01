@@ -45,9 +45,11 @@ export default function ProcessPage() {
 	const [processNotFound, setProcessNotFound] = useState<boolean>(false);
 	const [processInfo, setProcessInfo] = useState<IProcess | undefined>();
 	const [showMovimentos, setShowMovimentos] = useState(false); // Estado para controlar a visibilidade dos movimentos
+	const [isFavorited, setIsFavorited] = useState(false); // Estado para a estrela de favorito
 
 	const { userLogged } = useContext(UserContext);
 
+	console.log(userLogged);
 	useEffect(() => {
 		if (typeof params.id !== 'string') return;
 		if (!params.id) return;
@@ -98,10 +100,11 @@ export default function ProcessPage() {
 		if(!userLogged) return;
 		const newUserProcess = {
 			userId: userLogged.id,
-			processCode: process.numeroProcesso
+			processCode: processInfo.numeroProcesso,
+			favouritedDate: Date.now()
 		}
 
-		axios.post(`/api/UserProcess`, newUserProcess)
+		axios.post(`/api/userProcess`, newUserProcess)
 			.then(response => {
 				console.log("Relação registrado com sucesso na lista do usuário", response);
 			})
@@ -110,10 +113,56 @@ export default function ProcessPage() {
 			});
 	}
 
+	function toggleFavorite() {
+		if (isFavorited){
+			//desfavoritar
+		}
+		else{
+			//favoritar
+			if(!userLogged) return;
+			const newUserProcess = {
+				userId: userLogged.id,
+				processCode: processInfo?.numeroProcesso,
+				favouritedDate: Date.now()
+			}
+			axios.post(`/api/userProcess`, newUserProcess)
+			.then(response => {
+				console.log("Relação registrado com sucesso na lista do usuário", response);
+			})
+			.catch(error => {
+				console.error("Erro ao criar relação processo-usuário", error);
+			});
+
+
+			// const newProcess = {           
+			// 	name: processInfo?.orgaoJulgador.nome,
+			// 	movementCount: processInfo?.movimentos.length,
+			// 	searchDate: Date.now(),
+			// 	processCode: process?.numeroProcesso
+			// }
+			// axios.post(`/api/process`, newProcess)
+			// .then(response => {
+			// 	console.log("Relação registrado com sucesso na lista do usuário", response);
+			// })
+			// .catch(error => {
+			// 	console.error("Erro ao criar relação processo-usuário", error);
+			// });
+
+		}
+		setIsFavorited(!isFavorited); // Alterna o estado de favoritar
+	}
+
 	return (
 		<div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-purple-800 p-4">
-			<header className="text-white text-3xl font-bold mb-8">
-				Detalhes do Processo
+			<header className="text-white text-3xl font-bold mb-8 flex items-center gap-4">
+				<span>Detalhes do Processo</span>
+				<button onClick={toggleFavorite}>
+					{userLogged && (isFavorited ? (
+						<span className="text-yellow-400">★</span>
+					) : (
+						<span className="text-gray-400">☆</span>
+					))} 				
+				</button>
 			</header>
 
 			<main className="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full">
@@ -148,7 +197,6 @@ export default function ProcessPage() {
 				<Link href={"/"} passHref className="text-lg underline hover:text-gray-200 transition-all">
 					<div>Voltar para a busca</div>
 				</Link>
-
 			</footer>
 		</div>
 	);
