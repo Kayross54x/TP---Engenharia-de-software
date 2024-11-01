@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     const { senha, email } = await req.json();
-    console.log(senha, email);
+    console.log("adawdawdawdawd",senha, email);
 
     //Fazer uma requisição pra tebelas de usuario e senha
     const user = await prisma.user.findUnique({ where: { email } });
@@ -17,10 +17,4 @@ export async function POST(req: Request) {
     } else {
         return NextResponse.json({ error: "Senha incorreta" }, { status: 400 });
     }
-
-    //Se estiver correta, retornar o usuario
-
-
-    //Se estiver incorreta, retornar um erro
-
 }

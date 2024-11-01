@@ -29,7 +29,7 @@ export default function Login() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, senha }),
+            body: JSON.stringify({ email: email, senha: senha }),
         });
 
         if (response.status === 200) {
