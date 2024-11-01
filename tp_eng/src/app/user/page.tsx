@@ -46,7 +46,6 @@ export default function User() {
 
 		axios.put('/api/user', { ...userLogged, ...editedUser }).then((response) => {
 			const { data } = response;
-			console.log(data)
 			setUserLogged(data.userObject);
 			setEditedUser({ name: data.userObject?.name, email: data.userObject?.email });
 			setEditLoading(false);
@@ -59,7 +58,7 @@ export default function User() {
 			
 		handleModalClose();
 	}
-
+	
 	return (
 		<div className="flex flex-col justify-center items-center h-full p-12 bg-gradient-to-b from-blue-900 to-purple-800">
 			<div className="rounded-lg w-full p-6 flex flex-col items-center justify-between">

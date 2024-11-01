@@ -97,7 +97,7 @@ export default function Register() {
 
         if (response.status == 200) {
             const data = await response.json();
-            setUserLogged(data)
+            setUserLogged(data.userObject)
             setLoading(false);
             router.push("/user");
         } else if (response.status == 400) {

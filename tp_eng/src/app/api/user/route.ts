@@ -16,7 +16,6 @@ export async function PUT(req: Request) {
 	});
 
     if (userObject) {
-		console.log("Deu certo", userObject);
         return NextResponse.json({ userObject });
     } else {
         return NextResponse.json({ error: "Erro ao atualizar usuário na base de dados." }, { status: 400 });

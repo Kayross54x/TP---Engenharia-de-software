@@ -63,7 +63,6 @@ export default function ProcessPage() {
 		})
 			.then(response => {
 				const info: JsonResponse = response.data;
-				console.log("processo obtido", info.data.hits.hits[0]?._source);
 				if(info.data.hits.hits[0]?._source) {
 					setProcessInfo(info.data.hits.hits[0]._source); // Acessando _source
 					if(userLogged) {

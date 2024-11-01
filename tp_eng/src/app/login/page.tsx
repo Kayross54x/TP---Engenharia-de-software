@@ -48,7 +48,7 @@ export default function Login() {
         e.preventDefault();
         setLoading(true);
 
-        if (!formValid()) {setLoading(false); return};
+        if (!formValid()) { setLoading(false); return };
 
         //Fazendo a requisição de login para a rota de API
         const response = await fetch("/api/login", {
@@ -74,44 +74,43 @@ export default function Login() {
     }
 
     return (
-        <div className="flex gap-8 row-start-2 items-start justify-center h-full p-12 bg-gradient-to-b from-blue-900 to-purple-800">
-            <ol className="list-inside text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-                <li className="mb-12 font-bold text-5xl">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-purple-800 p-4">
+            <ol className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+                <li className="text-3xl font-bold text-center mb-6 text-gray-800">
                     Bem vindos ao ProcessJur
                 </li>
 
-                <form onSubmit={onLoginSubmit}>
+                <form onSubmit={onLoginSubmit} className="flex flex-col gap-4">
                     <div className="flex flex-col justify-center w-full">
-                        <li className="mb-2">
+                        <label className="text-gray-700 font-semibold">
                             Insira seu email
-                        </li>
+                        </label>
                         <input
                             type="text"
                             placeholder="Email"
                             value={email}
                             onChange={onUsernameOrEmailChange}
-                            className={`rounded p-2 border-2 w-full text-purple-500 focus:outline-purple-500 
-                                        ${emailError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
+                            className={`rounded p-3 border border-gray-300 w-full text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all ${emailError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
                         />
                         {emailError && (
-                            <span className="ml-1 text-red-600">{emailError}</span>
+                            <span className="ml-1 mb-4 text-red-600">{emailError}</span>
                         )}
 
-
-                        <li className="mb-2 mt-4">
+                        <label className="text-gray-700 mt-4 font-semibold">
                             Insira sua senha
-                        </li>
+                        </label>
                         <input
                             type="password"
                             placeholder="Senha"
                             value={password}
                             onChange={onPasswordChange}
-                            className={`rounded p-2 border-2 w-full text-purple-500 focus:outline-purple-500 
-                                ${passwordError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
+                            className={`rounded p-3 border border-gray-300 w-full text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all ${passwordError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
                         />
+
                         {passwordError && (
                             <span className="ml-1 text-red-600">{passwordError}</span>
                         )}
+
                         <button type="submit" disabled={loading} className="mt-4 rounded bg-purple-500 p-2 hover:bg-purple-400 transition-all w-full">
                             {loading ? "Carregando..." : "Entrar"}
                         </button>
@@ -124,14 +123,8 @@ export default function Login() {
                             Criar uma conta
                         </button>
                     </Link>
-
-                    <Link href="/forgot-password">
-                        <p className="text-sm text-purple-500 hover:underline mb-4 sm:mb-0 sm:mr-2">Esqueceu sua senha?</p>
-                    </Link>
                 </div>
             </ol>
         </div>
-
-
     );
 }
