@@ -24,25 +24,19 @@ export default function Login() {
     async function onLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        // console.log(email, senha);
-
-        //Fazendo a requisição de login para a rota de API
         const response = await fetch("/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email: email, senha: senha }),
+            body: JSON.stringify({ email, senha }),
         });
 
-        console.log(response);
-
-        if (response.status == 200) {
+        if (response.status === 200) {
             const data = await response.json();
-            user.setItem(data)
+            user.setItem(data);
             router.push("/user");
-            console.log("Usuário logado", data);
-        } else if (response.status == 400) {
+        } else if (response.status === 400) {
             console.error("Senha ou email incorretos");
         } else {
             console.error("Erro ao logar");
@@ -50,54 +44,57 @@ export default function Login() {
     }
 
     return (
-        <div className="flex gap-8 row-start-2 items-start justify-center h-full mt-12 p-12">
-            <ol className="list-inside text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-                <li className="mb-12 font-bold text-5xl">
-                    Bem vindos ao ProcessJur
-                </li>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-purple-800 p-4">
+            <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+                <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+                    Bem-vindo ao ProcessJur
+                </h1>
 
-                <form onSubmit={onLoginSubmit}>
-                    <div className="flex flex-col justify-center w-full">
-						<li className="mb-2">
-							Insira seu email
-						</li>
-                        <input
-                            type="text"
-                            placeholder="Email"
-                            value={email}
-                            onChange={onUsernameOrEmailChange}
-                            className="rounded p-2 border border-gray-300 w-full text-purple-500 focus:outline-purple-500 mb-4"
-                        />
-						<li className="mb-2">
-							Insira sua senha
-						</li>
-                        <input
-                            type="password"
-                            placeholder="Senha"
-                            value={senha}
-                            onChange={onPasswordChange}
-                            className="rounded p-2 border border-gray-300 w-full text-purple-500 focus:outline-purple-500"
-                        />
-                        <button type="submit" className="mt-4 rounded bg-purple-500 p-2 hover:bg-purple-400 transition-all w-full">
-                            Entrar
-                        </button>
-                    </div>
+                <form onSubmit={onLoginSubmit} className="flex flex-col gap-4">
+                    <label className="text-gray-700 font-semibold">
+                        Insira seu email
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="Email"
+                        value={email}
+                        onChange={onUsernameOrEmailChange}
+                        className="rounded p-3 border border-gray-300 w-full text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all mb-4"
+                    />
+
+                    <label className="text-gray-700 font-semibold">
+                        Insira sua senha
+                    </label>
+                    <input
+                        type="password"
+                        placeholder="Senha"
+                        value={senha}
+                        onChange={onPasswordChange}
+                        className="rounded p-3 border border-gray-300 w-full text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all mb-4"
+                    />
+
+                    <button
+                        type="submit"
+                        className="w-full p-3 bg-purple-600 text-white rounded-lg hover:bg-purple-500 transition-all"
+                    >
+                        Entrar
+                    </button>
                 </form>
 
                 <div className="mt-4 flex flex-col items-center w-full sm:flex-row sm:justify-between">
-					<Link href="/register" passHref>
-						<button className="rounded mb-2 bg-gray-200 border border-gray-300 p-2 text-sm text-purple-500 hover:bg-gray-300 hover:border-gray-400 transition-all w-full sm:w-auto">
-							Criar uma conta
-						</button>
-					</Link>
+                    <Link href="/register" passHref>
+                        <button className="rounded bg-gray-200 border border-gray-300 p-2 text-sm text-purple-500 hover:bg-gray-300 hover:border-gray-400 transition-all w-full sm:w-auto mb-2 sm:mb-0">
+                            Criar uma conta
+                        </button>
+                    </Link>
                     
-					<Link href="/forgot-password">
-						<p className="text-sm text-purple-500 hover:underline mb-4 sm:mb-0 sm:mr-2">Esqueceu sua senha?</p>
-					</Link>
+                    <Link href="/forgot-password">
+                        <p className="text-sm text-purple-500 hover:underline">
+                            Esqueceu sua senha?
+                        </p>
+                    </Link>
                 </div>
-            </ol>
+            </div>
         </div>
-
-
     );
 }
