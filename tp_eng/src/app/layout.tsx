@@ -31,42 +31,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					}
 				`}</style>
 			</head>
-<<<<<<< HEAD
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col justify-between h-screen`}>
-				<header className="flex justify-between items-center p-4 bg-gray-800 text-white">
-					<Link href="/" passHref>
-						<h1 className="text-3xl font-bold">
-							ProcessJur
-						</h1>
-					</Link>
-					
-					<div>
-						{/*{/* Botão de login *
-						<Link href="/login" passHref>
-							<button className="rounded border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
-								Logar
-							</button>
-						</Link>*/}
-						{/* Layout para cabeçalho de usuário logado */}
-						{/* 
-            <div className="flex items-center">
-              <span className="mr-4">Nome do Usuário</span>
-              <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-                Sair
-              </button>
-            </div>
-            */}
-					</div>
-				</header>
-				<main className="flex-grow">{children}</main>
-				<footer className="flex gap-6 flex-wrap items-center justify-center p-4 bg-gray-800">
-=======
 			<UserContextProvider>
 				<body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col justify-between h-screen`}>
 					<Header />
 					<main className="flex-grow">{children}</main>
 					{/* <footer className="flex gap-6 flex-wrap items-center justify-center p-4 bg-gray-800"> */}
->>>>>>> 11442fc755582df8ac5c60b4adde0d528680e589
 					{/* Removendo links Learn, Examples e Go to nextjs.org */}
 					{/* <a
 						className="flex items-center gap-2 hover:underline hover:underline-offset-4"

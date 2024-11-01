@@ -3,11 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     const userInfo = await req.json();
-    console.log("ANTES", userInfo);
 
     const user = await prisma.user.create({ data: userInfo });
-
-    console.log("Depois", user);
 
     if (user) {
 		const userObject = {
