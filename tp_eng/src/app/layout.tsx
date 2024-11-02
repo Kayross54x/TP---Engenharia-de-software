@@ -1,8 +1,9 @@
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import UserContextProvider from "@/context/UserContext";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../styles/globals.css";
-import Header from "@/components/Header";
-import UserContextProvider from "@/context/UserContext";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -30,11 +31,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						height: 100%;
 					}
 				`}</style>
+				<link
+					rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+				/>
 			</head>
 			<UserContextProvider>
 				<body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col justify-between h-screen`}>
 					<Header />
 					<main className="flex-grow">{children}</main>
+					<Footer />
 					{/* <footer className="flex gap-6 flex-wrap items-center justify-center p-4 bg-gray-800"> */}
 					{/* Removendo links Learn, Examples e Go to nextjs.org */}
 					{/* <a

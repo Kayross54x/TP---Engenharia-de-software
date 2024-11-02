@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
 	const [processId, setProcessId] = useState<string>("");
@@ -49,16 +48,6 @@ export default function Home() {
 				</form>
 			</main>
 
-			<footer className="mt-8 text-white">
-				<Link href={"/login"} passHref>
-					<div
-						className="text-lg hover:text-gray-200 transition-all rounded-md px-4 py-2 bg-gray-800"
-					>
-						Login
-					</div>
-				</Link>
-				
-			</footer>
 		</div>
 	);
 }
