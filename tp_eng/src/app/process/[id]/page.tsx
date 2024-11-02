@@ -65,11 +65,11 @@ export default function ProcessPage() {
 		})
 			.then(response => {
 				const info: JsonResponse = response.data;
-				if(info.data.hits.hits[0]?._source) {
+				if (info.data.hits.hits[0]?._source) {
 					setProcessInfo(info.data.hits.hits[0]._source); // Acessando _source
-					if(userLogged) {
+					if (userLogged) {
+						getFavoriteInfo(userLogged.id, info.data.hits.hits[0]._source.numeroProcesso);
 						registerProcess(info.data.hits.hits[0]._source);
-						registerUserProcess(info.data.hits.hits[0]._source);
 					}
 				} else {
 					setProcessNotFound(true);
@@ -77,6 +77,23 @@ export default function ProcessPage() {
 			})
 			.catch(error => {
 				console.error("Erro ao obter o processo", error);
+			});
+	}
+
+	function getFavoriteInfo(userId: string, processCode: string) {
+		axios.get(`/api/userProcess/${userId}/${processCode}`, {
+			headers: {
+				"Content-Type": "application/json",
+			}
+		})
+			.then(response => {
+				const info = response.data;
+				if (info.userProcess) {
+					setIsFavorited(true);
+				}
+			})
+			.catch(error => {
+				console.error("Erro ao obter a relação processo-usuário", error);
 			});
 	}
 
@@ -96,60 +113,39 @@ export default function ProcessPage() {
 			});
 	}
 
-	function registerUserProcess(process: IProcess) {
-		if(!userLogged) return;
-		const newUserProcess = {
-			userId: userLogged.id,
-			processCode: processInfo.numeroProcesso,
-			favouritedDate: Date.now()
-		}
+	async function toggleFavorite() {
+		if (isFavorited) {
+			//Desfavoritar
+			try {
+				const response = await axios.delete(`/api/userProcess/${userLogged?.id}/${processInfo?.numeroProcesso}`, {
+					data: { userId: userLogged?.id, processCode: processInfo?.numeroProcesso }  // Envia os dados no corpo da requisição
+				});
 
-		axios.post(`/api/userProcess`, newUserProcess)
-			.then(response => {
-				console.log("Relação registrado com sucesso na lista do usuário", response);
-			})
-			.catch(error => {
-				console.error("Erro ao criar relação processo-usuário", error);
-			});
-	}
-
-	function toggleFavorite() {
-		if (isFavorited){
-			//desfavoritar
+				if (response.data.message) {
+					setIsFavorited(!isFavorited); // Alterna o estado de favoritar
+					console.log(response.data.message);
+				}
+			} catch (error) {
+				console.error("Erro ao deletar o processo:", error.response?.data || error.message);
+			}
 		}
-		else{
+		else {
 			//favoritar
-			if(!userLogged) return;
+			if (!userLogged) return;
 			const newUserProcess = {
 				userId: userLogged.id,
 				processCode: processInfo?.numeroProcesso,
-				favouritedDate: Date.now()
+				favouritedDate: new Date()
 			}
 			axios.post(`/api/userProcess`, newUserProcess)
-			.then(response => {
-				console.log("Relação registrado com sucesso na lista do usuário", response);
-			})
-			.catch(error => {
-				console.error("Erro ao criar relação processo-usuário", error);
-			});
-
-
-			// const newProcess = {           
-			// 	name: processInfo?.orgaoJulgador.nome,
-			// 	movementCount: processInfo?.movimentos.length,
-			// 	searchDate: Date.now(),
-			// 	processCode: process?.numeroProcesso
-			// }
-			// axios.post(`/api/process`, newProcess)
-			// .then(response => {
-			// 	console.log("Relação registrado com sucesso na lista do usuário", response);
-			// })
-			// .catch(error => {
-			// 	console.error("Erro ao criar relação processo-usuário", error);
-			// });
-
+				.then(response => {
+					console.log("Relação registrado com sucesso na lista do usuário", response);
+					setIsFavorited(!isFavorited); // Alterna o estado de favoritar
+				})
+				.catch(error => {
+					console.error("Erro ao criar relação processo-usuário", error);
+				});
 		}
-		setIsFavorited(!isFavorited); // Alterna o estado de favoritar
 	}
 
 	return (
@@ -161,7 +157,7 @@ export default function ProcessPage() {
 						<span className="text-yellow-400">★</span>
 					) : (
 						<span className="text-gray-400">☆</span>
-					))} 				
+					))}
 				</button>
 			</header>
 
