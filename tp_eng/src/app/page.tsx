@@ -1,10 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from '@/context/UserContext';
+import axios from "axios";
+import { Process } from "@prisma/client";
 
 export default function Home() {
 	const [processId, setProcessId] = useState<string>("");
 	const router = useRouter();
+	const { userLogged } = useContext(UserContext);
+	const [userFavourites, setUserFavourites] = useState<Process[]>([]);
 
 	function onProcessIdChange(e: React.ChangeEvent<HTMLInputElement>) {
 		e.preventDefault();
@@ -16,6 +21,28 @@ export default function Home() {
 		if (processId.length > 0) router.push(`/process/${processId}`);
 		else alert("Digite um código válido.");
 	}
+
+	function processRedirect(id: string){
+		router.push(`/process/${id}`);
+	}
+
+	useEffect(() => {
+		if (!userLogged) return;
+		axios.get(`/api/userProcess/${userLogged?.id}`, {
+			headers: {
+				"Content-Type": "application/json",
+			}
+		})
+			.then(response => {
+				const info: JsonResponse = response.data;
+				console.log((info.processList))
+				setUserFavourites(info.processList)
+			})
+			.catch(error => {
+				console.error("Erro ao obter o processos favoritados pelo usuário", error);
+			});
+
+	}, [userLogged])
 
 	return (
 		<div className="min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-b from-blue-800 to-purple-700 p-4">
@@ -46,7 +73,28 @@ export default function Home() {
 						Buscar processo
 					</button>
 				</form>
+
 			</main>
+			{userFavourites.length > 0 && (
+					<div className="mt-8 w-full sm:max-w-7xl p-6">
+						<h3 className="text-2xl font-bold mb-4">Processos Favoritados</h3>
+						<div className="space-y-4">
+							{/* Card 1 */}
+							{userFavourites.map((item) => (
+								<div
+                                    className="bg-slate-800 shadow-md rounded-lg p-4 w-full cursor-pointer hover:bg-slate-600 transition-all duration-200"
+                                    onClick={() => processRedirect(item.processCode)}
+                                >
+                                    <p className="font-bold">Código do Processo: {item.processCode}</p>
+                                    <p>Nome do Processo: {item.name}</p>
+                                    <p>Movimentações: {item.movementCount}</p>
+                                    <p>Data da pesquisa: {new Date(item.searchDate).toLocaleDateString() || 'N/A'}</p>
+                                </div>
+							))}
+							
+						</div>
+					</div>
+				)}
 
 		</div>
 	);
