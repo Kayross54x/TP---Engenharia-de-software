@@ -44,12 +44,11 @@ export default function ProcessPage() {
 	const params = useParams();
 	const [processNotFound, setProcessNotFound] = useState<boolean>(false);
 	const [processInfo, setProcessInfo] = useState<IProcess | undefined>();
-	const [showMovimentos, setShowMovimentos] = useState(false); // Estado para controlar a visibilidade dos movimentos
-	const [isFavorited, setIsFavorited] = useState(false); // Estado para a estrela de favorito
+	const [showMovimentos, setShowMovimentos] = useState(false); 
+	const [isFavorited, setIsFavorited] = useState(false); 
 
 	const { userLogged } = useContext(UserContext);
 
-	console.log(userLogged);
 	useEffect(() => {
 		if (typeof params.id !== 'string') return;
 		if (!params.id) return;
@@ -66,7 +65,7 @@ export default function ProcessPage() {
 			.then(response => {
 				const info: JsonResponse = response.data;
 				if (info.data.hits.hits[0]?._source) {
-					setProcessInfo(info.data.hits.hits[0]._source); // Acessando _source
+					setProcessInfo(info.data.hits.hits[0]._source);
 					if (userLogged) {
 						getFavoriteInfo(userLogged.id, info.data.hits.hits[0]._source.numeroProcesso);
 						registerProcess(info.data.hits.hits[0]._source);
@@ -115,22 +114,19 @@ export default function ProcessPage() {
 
 	async function toggleFavorite() {
 		if (isFavorited) {
-			//Desfavoritar
 			try {
 				const response = await axios.delete(`/api/userProcess/${userLogged?.id}/${processInfo?.numeroProcesso}`, {
-					data: { userId: userLogged?.id, processCode: processInfo?.numeroProcesso }  // Envia os dados no corpo da requisição
+					data: { userId: userLogged?.id, processCode: processInfo?.numeroProcesso }  
 				});
 
 				if (response.data.message) {
-					setIsFavorited(!isFavorited); // Alterna o estado de favoritar
-					console.log(response.data.message);
+					setIsFavorited(!isFavorited);
 				}
 			} catch (error) {
 				console.error("Erro ao deletar o processo:", error.response?.data || error.message);
 			}
 		}
 		else {
-			//favoritar
 			if (!userLogged) return;
 			const newUserProcess = {
 				userId: userLogged.id,
@@ -139,8 +135,7 @@ export default function ProcessPage() {
 			}
 			axios.post(`/api/userProcess`, newUserProcess)
 				.then(response => {
-					console.log("Relação registrado com sucesso na lista do usuário", response);
-					setIsFavorited(!isFavorited); // Alterna o estado de favoritar
+					setIsFavorited(!isFavorited); 
 				})
 				.catch(error => {
 					console.error("Erro ao criar relação processo-usuário", error);

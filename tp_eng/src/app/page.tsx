@@ -35,7 +35,6 @@ export default function Home() {
 		})
 			.then(response => {
 				const info: JsonResponse = response.data;
-				console.log((info.processList))
 				setUserFavourites(info.processList)
 			})
 			.catch(error => {
@@ -77,23 +76,35 @@ export default function Home() {
 			</main>
 			{userFavourites.length > 0 && (
 					<div className="mt-8 w-full sm:max-w-7xl p-6">
-						<h3 className="text-2xl font-bold mb-4">Processos Favoritados</h3>
-						<div className="space-y-4">
-							{/* Card 1 */}
-							{userFavourites.map((item) => (
-								<div
-                                    className="bg-slate-800 shadow-md rounded-lg p-4 w-full cursor-pointer hover:bg-slate-600 transition-all duration-200"
-                                    onClick={() => processRedirect(item.processCode)}
-                                >
-                                    <p className="font-bold">Código do Processo: {item.processCode}</p>
-                                    <p>Nome do Processo: {item.name}</p>
-                                    <p>Movimentações: {item.movementCount}</p>
-                                    <p>Data da pesquisa: {new Date(item.searchDate).toLocaleDateString() || 'N/A'}</p>
-                                </div>
-							))}
-							
-						</div>
+					<h3 className="text-2xl font-bold mb-4">Processos Favoritados</h3>
+					<div className="space-y-4">
+						{userFavourites.map((item) => (
+							<div
+								key={item.processCode}
+								className="bg-slate-800 shadow-md rounded-lg p-5 w-full cursor-pointer hover:bg-slate-700 transition-all duration-200"
+								onClick={() => processRedirect(item.processCode)}
+							>
+								<div className="flex justify-between items-center mb-2">
+									<p className="text-lg font-bold flex items-center">
+										🔒 Código do Processo: <span className="ml-2 text-slate-300">{item.processCode}</span>
+									</p>
+									<span className="text-xs text-slate-400">
+										📅 {new Date(item.searchDate).toLocaleDateString() || 'N/A'}
+									</span>
+								</div>
+								<div className="text-slate-200 mb-1">
+									<span className="font-semibold text-slate-100">📜 Nome do Processo</span>
+									<span className="ml-5 text-slate-300">{item.name}</span>
+								</div>
+								<div className="text-slate-200">
+									<span className="font-semibold text-slate-100">🔄 Movimentações </span>
+									<span className="ml-5 text-slate-300">{item.movementCount}</span>
+								</div>
+							</div>
+						))}
 					</div>
+				</div>
+				
 				)}
 
 		</div>

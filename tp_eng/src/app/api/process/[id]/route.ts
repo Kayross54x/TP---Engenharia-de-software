@@ -10,13 +10,11 @@ export async function GET(request: Request) {
 
     const url = "https://api-publica.datajud.cnj.jus.br/api_publica_tjdft/_search";
 
-    // Configurando os cabeçalhos
     const headers = {
         "Content-Type": "application/json",
-        "Authorization": `APIKey ${process.env.NEXT_PUBLIC_API_URL}` // Utilize a variável de ambiente para a chave da API
+        "Authorization": `APIKey ${process.env.NEXT_PUBLIC_API_URL}` 
     };
 
-    // Criando o corpo da requisição
     const body = {
         "query": {
             "match": {

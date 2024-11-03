@@ -5,7 +5,6 @@ export async function POST(req: Request) {
     const processInfo = await req.json();
 
     const process = await prisma.process.create({ data: processInfo });
-    //Verificar se a senha está correta
     if (process) {
         return NextResponse.json({ process });
     } else {

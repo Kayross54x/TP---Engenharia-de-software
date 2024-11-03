@@ -20,7 +20,7 @@ interface Hits {
 
 interface TotalHits {
     value: number;
-    relation: string; // 'eq', 'gte', etc.
+    relation: string;
 }
 
 interface IProcess {
@@ -36,10 +36,10 @@ interface Source {
     sistema: Sistema;
     formato: Formato;
     tribunal: string;
-    dataHoraUltimaAtualizacao: string; // ISO 8601 date format
+    dataHoraUltimaAtualizacao: string; 
     grau: string;
-    '@timestamp': string; // ISO 8601 date format
-    dataAjuizamento: string; // ISO 8601 date format
+    '@timestamp': string; 
+    dataAjuizamento: string; 
     movimentos: Movimento[];
     id: string;
     nivelSigilo: number;
@@ -66,7 +66,7 @@ interface Movimento {
     complementosTabelados: ComplementoTabelado[];
     codigo: number;
     nome: string;
-    dataHora: string; // ISO 8601 date format
+    dataHora: string; 
 }
 
 interface ComplementoTabelado {

@@ -15,37 +15,37 @@ export default function Footer() {
             <div className="flex items-center justify-center sm:justify-end space-x-8 mt-4 sm:mt-0">
                 <div className="flex space-x-4">
                     <span>Alex</span>
-                    <a href="/* LinkedIn link do Alex */" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/alex-eduardo/" target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-linkedin"></i>
                     </a>
-                    <a href="/* GitHub link do Alex */" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/AlexEduardo-zip" target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-github"></i>
                     </a>
                 </div>
                 <div className="flex space-x-4">
                     <span>Rubens</span>
-                    <a href="/* LinkedIn link do Rubens */" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/rubens-castro-382ba6219/" target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-linkedin"></i>
                     </a>
-                    <a href="/* GitHub link do Rubens */" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/RCastro13" target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-github"></i>
                     </a>
                 </div>
                 <div className="flex space-x-4">
                     <span>Mateus</span>
-                    <a href="/* LinkedIn link do Mateus */" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/mateus-augusto-53b2a5314/" target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-linkedin"></i>
                     </a>
-                    <a href="/* GitHub link do Mateus */" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/Mateusg2022" target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-github"></i>
                     </a>
                 </div>
                 <div className="flex space-x-4">
                     <span>Kayque</span>
-                    <a href="/* LinkedIn link do Kayque */" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/kayque-siqueira-ba8a34230/" target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-linkedin"></i>
                     </a>
-                    <a href="/* GitHub link do Kayque */" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/Kayross54x" target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-github"></i>
                     </a>
                 </div>

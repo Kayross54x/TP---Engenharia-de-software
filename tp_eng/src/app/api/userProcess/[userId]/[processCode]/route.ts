@@ -32,7 +32,7 @@ export async function DELETE(req: Request) {
     }
 
     try {
-        // Primeiro, buscar o processo que será deletado
+        
         const userProcess = await prisma.userProcess.findFirst({
             where: {
                 userId: userId,
@@ -40,17 +40,15 @@ export async function DELETE(req: Request) {
             },
         });
 
-        console.log("Achoui", userProcess)
-
-        // Se o processo não for encontrado, retorna um erro
+       
         if (!userProcess) {
             return NextResponse.json({ error: "Processo não encontrado." }, { status: 404 });
         }
 
-        // Depois, realizar a deleção
+        
         const deletedProcess = await prisma.userProcess.delete({
             where: {
-                id: userProcess.id, // Usar o id do processo encontrado
+                id: userProcess.id,
             },
         });
 

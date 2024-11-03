@@ -10,8 +10,5 @@ export async function GET(request: Request) {
 
     const user = await prisma.user.findUnique({ where: { id } });
 
-    //fazer a requisição com o fetch pro jus passando o processId
-
-    // aqui você retorna o processo depois de cadastrar no banco
     return NextResponse.json({ user });
 }

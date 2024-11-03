@@ -86,7 +86,7 @@ export default function Register() {
             name: name,
             createdAt: new Date(),
         }
-        //Fazendo a requisição de cadastro para a rota de API
+        
         const response = await fetch("/api/registerUser", {
             method: "POST",
             headers: {

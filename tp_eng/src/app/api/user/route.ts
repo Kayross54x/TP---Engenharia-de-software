@@ -7,11 +7,11 @@ export async function PUT(req: Request) {
 
 	const userObject = await prisma.user.update({
 		where: {
-			id: id,  // Localiza o usuário pelo ID
+			id: id, 
 		},
 		data: {
-			email: email,  // Atualiza o email
-			name: name,    // Atualiza o nome
+			email: email, 
+			name: name,    
 		},
 	});
 

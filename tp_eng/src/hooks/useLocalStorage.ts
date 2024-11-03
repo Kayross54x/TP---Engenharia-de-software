@@ -13,7 +13,7 @@ function useLocalStorage(key: string) {
     }
 
     function getItem() {
-        if (!isClient()) return undefined; // Verifica se está no cliente
+        if (!isClient()) return undefined; 
         try {
             const item = window.localStorage.getItem(key);
             return item ? JSON.parse(item) : undefined;

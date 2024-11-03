@@ -50,7 +50,7 @@ export default function Login() {
 
         if (!formValid()) { setLoading(false); return };
 
-        //Fazendo a requisição de login para a rota de API
+        
         const response = await fetch("/api/login", {
             method: "POST",
             headers: {
