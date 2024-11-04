@@ -10,7 +10,7 @@ export default function Header() {
 
 	function onLoggout() {
 		setUserLogged(null);
-		navigate.push("/");
+		navigate.push("/login");
 	}
 
     return (
