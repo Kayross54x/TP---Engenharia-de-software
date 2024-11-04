@@ -16,7 +16,7 @@ export async function GET(req: Request, { params }: { params: { userId: string, 
         if (userProcess) {
             return NextResponse.json({ userProcess });
         } else {
-            return NextResponse.json({ error: "Processo não encontrado." }, { status: 404 });
+            return NextResponse.json({ error: "Relação entre processo e usuário não encontrada." }, { status: 404 });
         }
     } catch (error) {
         console.error("Erro ao buscar o processo:", error);
@@ -40,11 +40,9 @@ export async function DELETE(req: Request) {
             },
         });
 
-       
         if (!userProcess) {
-            return NextResponse.json({ error: "Processo não encontrado." }, { status: 404 });
+            return NextResponse.json({ error: "Relação entre processo e usuário não encontrada." }, { status: 404 });
         }
-
         
         const deletedProcess = await prisma.userProcess.delete({
             where: {

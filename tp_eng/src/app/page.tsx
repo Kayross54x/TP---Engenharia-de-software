@@ -34,18 +34,17 @@ export default function Home() {
 			}
 		})
 			.then(response => {
-				const info: JsonResponse = response.data;
+				const info = response.data;
 				setUserFavourites(info.processList)
 			})
 			.catch(error => {
 				console.error("Erro ao obter o processos favoritados pelo usuário", error);
 			});
-
 	}, [userLogged])
 
 	return (
 		<div className="min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-b from-blue-800 to-purple-700 p-4">
-			<header className="text-white text-2xl font-bold mb-4">
+			<header className="text-white text-2xl font-bold mb-4 mt-4">
 				ProcessJur
 			</header>
 
@@ -63,7 +62,6 @@ export default function Home() {
 							onChange={onProcessIdChange}
 							className="w-full p-3 border-2 text-gray-800 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all"
 						/>
-						{/* <FaSearch className="absolute right-3 top-3 text-gray-400" /> */}
 					</div>
 					<button
 						type="submit"
@@ -104,9 +102,7 @@ export default function Home() {
 						))}
 					</div>
 				</div>
-				
 				)}
-
 		</div>
 	);
 }

@@ -7,12 +7,12 @@ export default function Footer() {
     const { userLogged } = useContext(UserContext);
 
     return (
-        <footer className="block sm:flex justify-between items-center p-4 bg-gray-800 text-white mt-0">
-            <div className="flex items-center justify-center sm:justify-start sm:items-start">
+        <footer className="block md:flex justify-between items-center p-4 bg-gray-800 text-white mt-0">
+            <div className="flex items-center justify-center sm:justify-start sm:items-start md:mb-0 mb-4">
                 <span>&copy; 2024 ProcessJur. Todos os direitos reservados.</span>
             </div>
 
-            <div className="flex items-center justify-center sm:justify-end space-x-8 mt-4 sm:mt-0">
+            <div className="block sm:flex items-center justify-center sm:justify-end md:space-x-8 space-x-0 mt-4 sm:mt-0 md:mb-0 mb-4">
                 <div className="flex space-x-4">
                     <span>Alex</span>
                     <a href="https://www.linkedin.com/in/alex-eduardo/" target="_blank" rel="noopener noreferrer">

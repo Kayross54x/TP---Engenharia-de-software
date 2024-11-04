@@ -29,7 +29,7 @@ export async function GET(request: Request) {
 
         return NextResponse.json({ data }, { status: 200 });
     } catch (error) {
-        console.error("Erro ao puxar processo", error);
+        console.error("Erro ao obter processo", error);
         return NextResponse.json({ error: "Erro ao obter processo" }, { status: 500 });
     }
 }

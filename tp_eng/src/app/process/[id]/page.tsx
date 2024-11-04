@@ -43,7 +43,7 @@ interface JsonResponse {
 export default function ProcessPage() {
 	const params = useParams();
 	const [processNotFound, setProcessNotFound] = useState<boolean>(false);
-	const [processInfo, setProcessInfo] = useState<IProcess | undefined>();
+	const [processInfo, setProcessInfo] = useState<IProcess | null>(null);
 	const [showMovimentos, setShowMovimentos] = useState(false); 
 	const [isFavorited, setIsFavorited] = useState(false); 
 
@@ -67,7 +67,7 @@ export default function ProcessPage() {
 				if (info.data.hits.hits[0]?._source) {
 					setProcessInfo(info.data.hits.hits[0]._source);
 					if (userLogged) {
-						getFavoriteInfo(userLogged.id, info.data.hits.hits[0]._source.numeroProcesso);
+						getFavoriteInfo(userLogged.id, info.data.hits.hits[0]._source.numeroProcesso || null);
 						registerProcess(info.data.hits.hits[0]._source);
 					}
 				} else {
@@ -79,7 +79,8 @@ export default function ProcessPage() {
 			});
 	}
 
-	function getFavoriteInfo(userId: string, processCode: string) {
+	function getFavoriteInfo(userId: string, processCode: string | null) {
+		if (!processCode) return;
 		axios.get(`/api/userProcess/${userId}/${processCode}`, {
 			headers: {
 				"Content-Type": "application/json",
@@ -92,7 +93,8 @@ export default function ProcessPage() {
 				}
 			})
 			.catch(error => {
-				console.error("Erro ao obter a relação processo-usuário", error);
+				setIsFavorited(false);
+				if(error.response.status !== 404) console.error("Erro ao obter a relação processo-usuário", error);
 			});
 	}
 
@@ -104,11 +106,11 @@ export default function ProcessPage() {
 		}
 
 		axios.post(`/api/process`, newProcess)
-			.then(response => {
-				console.log("Processo registrado com sucesso", response);
+			.then(() => {
+				console.log("Processo registrado com sucesso");
 			})
 			.catch(error => {
-				console.error("Erro ao registrar processo", error);
+				if(error.response.status !== 409) console.log("Erro ao registrar processo", error.response.data.error);
 			});
 	}
 
@@ -123,7 +125,7 @@ export default function ProcessPage() {
 					setIsFavorited(!isFavorited);
 				}
 			} catch (error) {
-				console.error("Erro ao deletar o processo:", error.response?.data || error.message);
+				console.error("Erro ao deletar o processo:", error);
 			}
 		}
 		else {
@@ -134,7 +136,7 @@ export default function ProcessPage() {
 				favouritedDate: new Date()
 			}
 			axios.post(`/api/userProcess`, newUserProcess)
-				.then(response => {
+				.then(() => {
 					setIsFavorited(!isFavorited); 
 				})
 				.catch(error => {

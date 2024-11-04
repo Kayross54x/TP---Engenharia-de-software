@@ -2,6 +2,7 @@
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/context/UserContext";
+import { EmailValidator } from "@/models/RegexValidator";
 
 export default function Register() {
     const [name, setName] = useState<string>("");
@@ -15,6 +16,7 @@ export default function Register() {
     const [emailError, setEmailError] = useState<string>("");
     const [passwordError, setPasswordError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
+    const emailRegex = new EmailValidator();
 
     const { setUserLogged } = useContext(UserContext);
     const router = useRouter();
@@ -44,10 +46,6 @@ export default function Register() {
         setSenha(e.target.value);
     }
 
-    const validEmail = (email: string) => (
-        email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-    )
-
     function formValid() {
         let valid: boolean = true;
         setEmailError("");
@@ -68,7 +66,7 @@ export default function Register() {
             valid = false;
         }
 
-        if (!validEmail(email)) { setEmailError("Insira um email válido."); valid = false; }
+        if (!emailRegex.validEmail(email)) { setEmailError("Insira um email válido."); valid = false; }
 
         return valid;
     }

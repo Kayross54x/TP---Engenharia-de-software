@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { UserContext } from "../../context/UserContext";
+import { EmailValidator } from "@/models/RegexValidator";
 
 export default function Login() {
     const [email, setEmail] = useState<string>("");
@@ -10,6 +11,7 @@ export default function Login() {
     const [emailError, setEmailError] = useState<string>("");
     const [passwordError, setPasswordError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
+    const emailRegex = new EmailValidator();
 
     const { setUserLogged } = useContext(UserContext);
     const router = useRouter();
@@ -24,10 +26,6 @@ export default function Login() {
         setSenha(e.target.value);
     }
 
-    const validEmail = (email: string) => (
-        email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-    )
-
     function formValid() {
         let valid: boolean = true;
         setEmailError("");
@@ -36,7 +34,7 @@ export default function Login() {
         if (password == "") { setPasswordError("Insira uma senha."); valid = false }
         if (email == "") { setEmailError("Insira um email."); valid = false };
 
-        if (!validEmail(email)) {
+        if (!emailRegex.validEmail(email)) {
             setEmailError("Insira um email válido.");
             valid = false;
         }
@@ -49,7 +47,6 @@ export default function Login() {
         setLoading(true);
 
         if (!formValid()) { setLoading(false); return };
-
         
         const response = await fetch("/api/login", {
             method: "POST",
