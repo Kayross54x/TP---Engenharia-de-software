@@ -1,8 +1,8 @@
 "use client";
-import { useContext, useState } from "react";
-import { useRouter } from "next/navigation";
 import { UserContext } from "@/context/UserContext";
 import { EmailValidator } from "@/models/RegexValidator";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
 
 export default function Register() {
     const [name, setName] = useState<string>("");
@@ -84,7 +84,7 @@ export default function Register() {
             name: name,
             createdAt: new Date(),
         }
-        
+
         const response = await fetch("/api/registerUser", {
             method: "POST",
             headers: {
@@ -108,15 +108,15 @@ export default function Register() {
     }
 
     return (
-        <div className="flex gap-8 row-start-2 items-start justify-center h-full p-12 bg-gradient-to-b from-blue-900 to-purple-800">
+        <div className="flex gap-8 row-start-2 items-start justify-center h-full p-12 bg-gradient-to-b from-[#142b3b] to-[#2d6084]">
             <ol className="list-inside text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-                <li className="mb-12 font-bold text-5xl">
-                    Bem vindos ao ProcessJur
+                <li className="mb-12 font-bold text-5xl text-white">
+                    Bem-vindos ao ProcessJur
                 </li>
 
                 <form onSubmit={onRegisterSubmit}>
                     <div className="flex flex-col justify-center w-full">
-                        <li className="mb-2">
+                        <li className="mb-2 text-gray-100">
                             Insira seu nome
                         </li>
                         <input
@@ -124,14 +124,14 @@ export default function Register() {
                             placeholder="Nome"
                             value={name}
                             onChange={onChangeName}
-                            className={`rounded p-2 border-2 w-full text-purple-500 focus:outline-purple-500 
-                                        ${nameError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
+                            className={`rounded-md p-2 border-2 w-full text-[#142b3b] focus:outline-none focus:ring-2 focus:ring-[#2d6084] 
+                                        ${nameError ? "placeholder-red-600 border-red-600" : "placeholder-gray-100 border-gray-100"}`}
                         />
                         {nameError && (
                             <span className="ml-1 text-red-600">{nameError}</span>
                         )}
 
-                        <li className="mb-2 mt-4">
+                        <li className="mb-2 mt-4 text-gray-100">
                             Insira seu email
                         </li>
                         <input
@@ -139,14 +139,14 @@ export default function Register() {
                             placeholder="Email"
                             value={email}
                             onChange={onUsernameOrEmailChange}
-                            className={`rounded p-2 border-2 w-full text-purple-500 focus:outline-purple-500 
-                                        ${emailError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
+                            className={`rounded-md p-2 border-2 w-full text-[#142b3b] focus:outline-none focus:ring-2 focus:ring-[#2d6084] 
+                                        ${emailError ? "placeholder-red-600 border-red-600" : "placeholder-gray-100 border-gray-100"}`}
                         />
                         {emailError && (
                             <span className="ml-1 text-red-600">{emailError}</span>
                         )}
 
-                        <li className="mb-2 mt-4">
+                        <li className="mb-2 mt-4 text-gray-100">
                             Insira sua senha
                         </li>
                         <input
@@ -154,14 +154,14 @@ export default function Register() {
                             placeholder="Senha"
                             value={password}
                             onChange={onPasswordChange}
-                            className={`rounded p-2 border-2 w-full text-purple-500 focus:outline-purple-500 
-                                ${passwordError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
+                            className={`rounded-md p-2 border-2 w-full text-[#142b3b] focus:outline-none focus:ring-2 focus:ring-[#2d6084] 
+                                        ${passwordError ? "placeholder-red-500 border-red-500" : "placeholder-gray-100 border-gray-100"}`}
                         />
                         {passwordError && (
                             <span className="ml-1 text-red-600">{passwordError}</span>
                         )}
 
-                        <li className="mb-2 mt-4">
+                        <li className="mb-2 mt-4 text-gray-100">
                             Confirme sua senha
                         </li>
                         <input
@@ -169,8 +169,8 @@ export default function Register() {
                             placeholder="Confirmar senha"
                             value={confirmPassword}
                             onChange={onConfirmPasswordChange}
-                            className={`rounded p-2 border-2 w-full text-purple-500 focus:outline-purple-500 
-                                ${confirmPasswordError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
+                            className={`rounded-md p-2 border-2 w-full text-[#142b3b] focus:outline-none focus:ring-2 focus:ring-[#2d6084] 
+                                        ${confirmPasswordError ? "placeholder-red-600 border-red-500" : "placeholder-gray-100 border-gray-100"}`}
                         />
                         {confirmPasswordError && (
                             <span className="ml-1 text-red-600">{confirmPasswordError}</span>
@@ -182,25 +182,23 @@ export default function Register() {
                                 checked={terms}
                                 onChange={handleCheckboxChange}
                                 className={`w-5 h-5 appearance-none border-2 cursor-pointer
-                                ${termsError ? 'border-red-600' : 'border-gray-300'}
-                                rounded-none
-                                focus:outline-purple-500
-                                checked:bg-purple-500
-                                `}
+                                            ${termsError ? 'border-red-400' : 'border-gray-100'}
+                                            rounded-none
+                                            focus:outline-none
+                                            checked:bg-blue-500
+                                            `}
                             />
-                            <label className={`ml-2 ${termsError ? 'text-red-600' : ''}`}>
+                            <label className={`ml-2 ${termsError ? 'text-red-400' : 'text-gray-100'}`}>
                                 Você concorda com os termos de uso e de privacidade
                             </label>
                         </div>
 
-                        <button type="submit" disabled={loading} className="mt-8 rounded bg-purple-500 p-2 hover:bg-purple-400 transition-all w-full">
+                        <button type="submit" disabled={loading} className="mt-8 rounded-md bg-blue-500 p-2 hover:bg-blue-400 transition-all w-full text-white">
                             {loading ? "Carregando..." : "Cadastrar"}
                         </button>
                     </div>
                 </form>
             </ol>
         </div>
-
-
     );
 }

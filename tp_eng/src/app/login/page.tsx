@@ -1,9 +1,9 @@
 "use client";
-import Link from "next/link";
-import { useContext, useState } from "react";
-import { useRouter } from "next/navigation";
-import { UserContext } from "../../context/UserContext";
 import { EmailValidator } from "@/models/RegexValidator";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export default function Login() {
     const [email, setEmail] = useState<string>("");
@@ -47,7 +47,7 @@ export default function Login() {
         setLoading(true);
 
         if (!formValid()) { setLoading(false); return };
-        
+
         const response = await fetch("/api/login", {
             method: "POST",
             headers: {
@@ -71,10 +71,10 @@ export default function Login() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-purple-800 p-4">
-            <ol className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-                <li className="text-3xl font-bold text-center mb-6 text-gray-800">
-                    Bem vindos ao ProcessJur
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#142b3b] to-[#2d6084] p-4">
+            <ol className="bg-[#e2edf5] rounded-lg shadow-lg p-8 max-w-md w-full">
+                <li className="text-3xl font-bold text-center mb-6 text-[#142b3b]">
+                    Bem-vindo ao ProcessJur
                 </li>
 
                 <form onSubmit={onLoginSubmit} className="flex flex-col gap-4">
@@ -87,7 +87,7 @@ export default function Login() {
                             placeholder="Email"
                             value={email}
                             onChange={onUsernameOrEmailChange}
-                            className={`rounded p-3 border border-gray-300 w-full text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all ${emailError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
+                            className={`rounded p-3 border w-full text-[#142b3b] focus:outline-none focus:ring-2 focus:ring-[#2d6084] transition-all ${emailError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
                         />
                         {emailError && (
                             <span className="ml-1 mb-4 text-red-600">{emailError}</span>
@@ -101,14 +101,14 @@ export default function Login() {
                             placeholder="Senha"
                             value={password}
                             onChange={onPasswordChange}
-                            className={`rounded p-3 border border-gray-300 w-full text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all ${passwordError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
+                            className={`rounded p-3 border w-full text-[#142b3b] focus:outline-none focus:ring-2 focus:ring-[#2d6084] transition-all ${passwordError ? "placeholder-red-600 border-red-600" : "placeholder-gray-300 border-gray-300"}`}
                         />
 
                         {passwordError && (
                             <span className="ml-1 text-red-600">{passwordError}</span>
                         )}
 
-                        <button type="submit" disabled={loading} className="mt-4 rounded bg-purple-500 p-2 hover:bg-purple-400 transition-all w-full">
+                        <button type="submit" disabled={loading} className="mt-4 rounded bg-[#142b3b] text-white p-2 hover:bg-[#2d6084] transition-all w-full">
                             {loading ? "Carregando..." : "Entrar"}
                         </button>
                     </div>
@@ -116,7 +116,7 @@ export default function Login() {
 
                 <div className="mt-4 flex flex-col items-center w-full sm:flex-row sm:justify-between">
                     <Link href="/register" passHref>
-                        <button className="rounded mb-2 bg-gray-200 border border-gray-300 p-2 text-sm text-purple-500 hover:bg-gray-300 hover:border-gray-400 transition-all w-full sm:w-auto">
+                        <button className="rounded mb-2 bg-gray-200 border border-gray-300 p-2 text-sm text-[#142b3b] hover:bg-gray-300 hover:border-gray-400 transition-all w-full sm:w-auto">
                             Criar uma conta
                         </button>
                     </Link>
@@ -124,4 +124,5 @@ export default function Login() {
             </ol>
         </div>
     );
+
 }
