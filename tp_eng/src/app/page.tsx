@@ -68,9 +68,9 @@ export default function Home() {
 
 	return (
 		<div className="min-h-[80vh] flex flex-col items-center justify-center bg-[#f1f6fa] p-6">
-			<header className="text-[#142b3b] text-3xl font-bold mb-6 mt-4 tracking-wide">
-				{greeting} {userLogged && userLogged.name ? `, ${userLogged.name.split(' ')[0]}` : ''}
-			</header>
+			<div className="text-[#142b3b] text-3xl font-bold mb-6 mt-4 tracking-wide">
+				{greeting}{userLogged && userLogged.name ? `, ${userLogged.name.split(' ')[0]}` : ''}
+			</div>
 
 			<main className="bg-[#ffffff] border border-[#142b3b] shadow-sm p-8 max-w-md w-full rounded">
 				<h1 className="text-xl font-bold text-center mb-6 text-[#142b3b]">
