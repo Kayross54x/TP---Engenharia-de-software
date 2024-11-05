@@ -67,3 +67,10 @@ Rubens da Cunha Castro - Desenvolvedor back-end
 
 4 - História 5 (Como usuário eu gostaria de revisitar processos):
   * Redirecionar para a página do processo ao clicar nos cards [Alex]
+
+
+UMLs Desenvolvidos
+
+![UML 1](https://github.com/Kayross54x/TP---Engenharia-de-software/blob/main/UMLENGSOFT-Página-1.drawio.png "UML 1")
+
+![UML 2](https://github.com/Kayross54x/TP---Engenharia-de-software/blob/main/UMLENGSOFT-Página-2.drawio.png "UML 2")
